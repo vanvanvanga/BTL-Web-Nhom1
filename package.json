@@ -1,0 +1,22 @@
+{
+  "name": "btl-web-nhom1",
+  "version": "1.0.0",
+  "description": "thu vien",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vanvanvanga/BTL-Web-Nhom1.git"
+  },
+  "author": "Nguyen Hong Van, Hoang Phuong Linh, Luu Ngoc Hien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vanvanvanga/BTL-Web-Nhom1/issues"
+  },
+  "homepage": "https://github.com/vanvanvanga/BTL-Web-Nhom1#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
