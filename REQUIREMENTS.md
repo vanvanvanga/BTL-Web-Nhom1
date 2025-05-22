@@ -1,5 +1,5 @@
 ﻿## Chia việc
-Các trang cần tạo: Trang chủ, Trang nội dung sách, Trang liên hệ, Trang quản trị, Trang donate (để đủ yêu cầu số trang nếu không kịp làm trang quản trị =))))), Trang đăng ký
+Các trang cần tạo: Trang chủ, Trang nội dung sách, Trang liên hệ, Trang quản trị, Trang donate (để đủ yêu cầu số trang nếu không kịp làm trang quản trị =))))), Trang đăng ký (tích hợp luôn vào đầu trang)
 
 Vân: Làm mục 2, mục 3 (viết ra file riêng để tái sử dụng được), mục 9  
 Chị Hiền: Làm mục 6, mục 10  
@@ -41,8 +41,8 @@ Làm xong hết trước 25/5 để check
 |*d. Các bình luận và đánh giá sau khi gửi sẽ được hiển thị công khai*|1|
 |11. Ở trang chủ, sau 1’ từ khi mở trang thì hiện quảng cáo một sản phẩm định trước dưới dạng popup|1|
 |*a. Khi người dùng ấn nút đóng popup, thì lần sau mở trang sẽ không hiện lại popup này nữa (sử dụng cookie)*|0,5|
-|**Điểm mức độ hoàn thiện nội dung, đúng yêu cầu của chủ đề đã chọn**||
-|Hệ số mức độ tự làm (không copy trên mạng, không sử dụng các thư viện ngoài, 0-1)||
-|Điểm cộng trình bày và thiết kế giao diện (0-1)||
-|Điểm cộng tổ chức project: cấu trúc thư mục/file, code phân tách mạch lạc các phần (0-1)||
+|**Điểm mức độ hoàn thiện nội dung, đúng yêu cầu của chủ đề đã chọn**|
+|Hệ số mức độ tự làm (không copy trên mạng, không sử dụng các thư viện ngoài, 0-1)|
+|Điểm cộng trình bày và thiết kế giao diện (0-1)|
+|Điểm cộng tổ chức project: cấu trúc thư mục/file, code phân tách mạch lạc các phần (0-1)|
 

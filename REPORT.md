@@ -10,4 +10,3 @@ Nộp 1 file nén gồm:
 + phân công nhiệm vụ của từng thành viên
 + hướng dẫn cài đặt và sử dụng
 ```
-|
