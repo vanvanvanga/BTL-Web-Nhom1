@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang chủ | Thư viện Nhóm 1</title>
   <link rel="stylesheet" href="/css/common.css">
+  <style>
+    #pop-up {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
   <%- include("../parts/header.ejs") %>
-  <%- include("../parts/footer.ejs") %>
+    <form method="post" action="/login">
+      <label for="username">Tên người dùng: <input type="text" name="username" id="username"></label><br />
+      <label for="password">Mật khẩu: <input type="password" name="password" id="password"></label><br />
+      <input type="button" value="Đăng nhập">
+    </form>
+
+    <%- include("../parts/footer.ejs") %>
 </body>
+
 </html>
