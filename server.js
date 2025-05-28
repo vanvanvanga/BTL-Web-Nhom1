@@ -14,6 +14,15 @@ app.get("/", (req, res) => {
 });
 
 // PHẦN CỦA LINH -----------------------------------------------------------------
+app.get("/contact", (req, res) => {
+  res.render("pages/contact")
+});
+
+app.post("/contact-form", (req, res) => {
+  const {name, email, address} = req.body;
+  console.log(req.body.name);
+  res.send("Da nhan form");
+})
 
 // PHẦN CỦA CHỊ HIỀN -----------------------------------------------------------------
 

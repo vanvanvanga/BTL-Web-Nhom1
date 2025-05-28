@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giới thiệu & Liên hệ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    h1, h2 {
+      color: #007BFF;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- a. Thông tin giới thiệu -->
+  <div class="section">
+    <h1>Thư viện VHL</h1>
+    <p>Chào mừng bạn đến với thư viện của chúng tôi!</p>
+  </div>
+
+  <!-- b. Thông tin liên hệ -->
+  <div class="section">
+    <h2>Thông tin liên hệ</h2>
+    <p><strong>Địa chỉ:</strong> Số 1, Đại Cồ Việt, Hà Nội</p>
+    <p><strong>Điện thoại:</strong> 0866 083 755</p>
+    <p><strong>Email:</strong> linhhp.csf@gmail.com</p>
+    <p><strong>Giờ làm việc:</strong> Thứ 2 – Thứ 7: 4h00 – 23h00</p>
+  </div>
+
+  <!-- c. Form gửi ý kiến liên hệ -->
+  <div class="section">
+    <h2>Gửi ý kiến liên hệ</h2>
+    <form method="post" action="/contact-form">
+      <label for="name">Họ và tên:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Nội dung:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
+
+  <script>
+    // function submitForm() {
+    //   alert("Cảm ơn bạn đã gửi ý kiến! Chúng tôi sẽ phản hồi sớm nhất.");
+    //   return false; // Ngăn không gửi form thật
+    // }
+  </script>
+
+</body>
+</html>
