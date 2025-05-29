@@ -1,8 +1,8 @@
 ﻿## Chia việc
 Các trang cần tạo: Trang chủ, Trang nội dung sách, Trang liên hệ, Trang quản trị, Trang donate (để đủ yêu cầu số trang nếu không kịp làm trang quản trị =))))), Trang đăng ký (tích hợp luôn vào đầu trang)
 
-Vân: Làm mục 2, mục 3 (viết ra file riêng để tái sử dụng được), mục 9  
-Chị Hiền: Làm mục 6, mục 10  
+Hiền: Làm mục 2, mục 3 (viết ra file riêng để tái sử dụng được), mục 9  
+Vân: Làm mục 6, mục 10  
 Linh: Làm mục 4 (viết ra file riêng để tái sử dụng được), mục 5, 11
 
 Khi làm lưu ý mục 7, mục 8

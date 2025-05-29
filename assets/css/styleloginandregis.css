@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-side {
+  flex: 1;
+  background: url('/img/background-login.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 60px;
+  min-height: 100vh;
+}
+
+form {
+  width: 100%;
+  max-width: 480px;
+  padding: 60px 50px;
+  background-color: #fff;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 26px;
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  margin: 14px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 17px;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 18px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #27ae60;
+}
+
+/* Tối ưu cho màn hình lớn */
+@media screen and (min-width: 1600px) {
+  .right-side {
+    padding: 100px;
+  }
+
+  form {
+    max-width: 560px;
+    padding: 70px 60px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  input, button {
+    font-size: 18px;
+  }
+}
