@@ -15,6 +15,15 @@ Trong VSCode, mở folder project ra, mở Terminal (``Ctrl + Shift + ` ``) rồ
 npm install
 ```
 
+Bước 3. Sau khi chỉnh sửa xong --> để upload lên cloud
+```
+git add --all
+git commit -a -m "nội dung tin nhắn"
+git status 
+git pull origin
+git push origin
+```
+
 ## Trong khi code
 - Đọc chia việc ở file `REQUIREMENTS.md`
 - Có gì mọi người có thể tham khảo tutorial của MDN: https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs
