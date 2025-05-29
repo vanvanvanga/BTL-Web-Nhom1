@@ -118,3 +118,8 @@ footer {
       text-align: center;
       background: linear-gradient(to bottom, var(--c05), var(--c04));
 }
+
+/* OTHER STUFF */
+button {
+  cursor: pointer;
+}

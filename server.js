@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const PORT = 3105;
-const mysql = require("mysql2/promise");
 
 app.use(express.urlencoded({extended: false}));
 
@@ -20,19 +19,8 @@ app.get("/", (req, res) => {
   res.render("pages/index")
 });
 
-// const connection = mysql.createConnection({
-//   host: "sql.freedb.tech",
-//   user: "freedb_queseraserasera",
-//   password: "DAuk6$TsBkv8hRe",
-//   database: "freedb_btl-web-20242",
-// });
-
-// if (connection) {
-//   console.log("Connected");
-// }
-
-// const login = require("./routes/login");
-// app.use("/login", login);
+const login = require("./routes/login");
+app.use("/login", login);
 
 // PHẦN CỦA LINH -----------------------------------------------------------------
 app.get("/contact", (req, res) => {

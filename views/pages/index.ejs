@@ -15,11 +15,11 @@
 </head>
 
 <body>
-  <%- include("../parts/header.ejs") %>
+    <%- include("../parts/header.ejs") %>
     <form method="post" action="/login">
       <label for="username">Tên người dùng: <input type="text" name="username" id="username"></label><br />
       <label for="password">Mật khẩu: <input type="password" name="password" id="password"></label><br />
-      <input type="button" value="Đăng nhập">
+      <button type="submit">Đăng nhập</button>
     </form>
 
     <%- include("../parts/footer.ejs") %>
