@@ -1,0 +1,48 @@
+/* Popup ẩn mặc định */
+#promoPopup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: white;
+  border: 2px solid #4facfe;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  padding: 20px;
+  text-align: center;
+}
+
+#promoPopup h2 {
+  margin-top: 0;
+  color: #007bff;
+}
+
+#promoPopup button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background: #4facfe;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#promoPopup button:hover {
+  background: #00c6ff;
+}
+
+/* Lớp mờ nền */
+#overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+}

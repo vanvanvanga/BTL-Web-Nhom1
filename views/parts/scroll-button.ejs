@@ -1,0 +1,14 @@
+  <!-- <style>
+    body {
+      height: 2000px; /* để cuộn được */
+      padding: 20px;
+      font-family: sans-serif;
+    }
+  </style> -->
+  <button id="scrollTopBtn" title="Lên đầu trang">↑</button>
+
+  <script>
+    document.getElementById("scrollTopBtn").onclick = function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>

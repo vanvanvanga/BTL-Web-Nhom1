@@ -3,6 +3,8 @@ const app = express();
 const PORT = 3105;
 const mysql = require("mysql2/promise");
 
+app.use(express.urlencoded({extended: false}));
+
 // Set EJS as view engine
 app.set("view engine", "ejs");
 app.use("/css", express.static("assets/css"));
@@ -14,6 +16,9 @@ app.use(cookieParser());
 
 // PHẦN CỦA VÂN -----------------------------------------------------------------
 // Use res.render to load up the view file
+app.get("/", (req, res) => {
+  res.render("pages/index")
+});
 
 // const connection = mysql.createConnection({
 //   host: "sql.freedb.tech",
@@ -21,7 +26,10 @@ app.use(cookieParser());
 //   password: "DAuk6$TsBkv8hRe",
 //   database: "freedb_btl-web-20242",
 // });
-// console.log("Connected to MySQL");
+
+// if (connection) {
+//   console.log("Connected");
+// }
 
 // const login = require("./routes/login");
 // app.use("/login", login);
@@ -33,10 +41,12 @@ app.get("/contact", (req, res) => {
 
 app.post("/contact-form", (req, res) => {
   const {name, email, address} = req.body;
-  console.log(req.body.name);
+  console.log(name, email, address);
   res.send("Da nhan form");
 })
 
 // PHẦN CỦA CHỊ HIỀN -----------------------------------------------------------------
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});

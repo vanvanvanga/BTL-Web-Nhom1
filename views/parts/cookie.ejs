@@ -1,0 +1,36 @@
+<!-- Popup + overlay -->
+  <div id="overlay"></div>
+  <div id="promoPopup">
+    <h2>🔥 Ưu đãi đặc biệt!</h2>
+    <p>Mua sản phẩm ABC giảm ngay 30% trong hôm nay!</p>
+    <button id="closePopup">Đóng</button>
+  </div>
+
+  <script>
+    // Kiểm tra xem popup đã bị tắt chưa
+    function hasClosedPopup() {
+      return document.cookie.includes("popupClosed=true");
+    }
+
+    function showPopup() {
+      if (!hasClosedPopup()) {
+        document.getElementById("promoPopup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+    }
+
+    function closePopup() {
+      // Đặt cookie cho 30 ngày
+      const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = "popupClosed=true; expires=" + expires + "; path=/";
+      document.getElementById("promoPopup").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    document.getElementById("closePopup").onclick = closePopup;
+
+    // Hiện popup sau 60 giây nếu chưa bị tắt
+    window.onload = function () {
+      setTimeout(showPopup, 60000); // 60.000 ms = 1 phút
+    };
+  </script>
