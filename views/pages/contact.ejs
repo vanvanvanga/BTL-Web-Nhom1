@@ -53,6 +53,11 @@
     button:hover {
       background: #0056b3;
     }
+
+    #message {
+      font-family: inherit;
+      resize: none;
+    }
   </style>
 </head>
 <body>
@@ -77,13 +82,13 @@
     <h2>Gửi ý kiến liên hệ</h2>
     <form method="post" action="/contact-form">
       <label for="name">Họ và tên:</label>
-      <input type="text" id="name" name="name" required>
+      <input type="text" id="name" name="name" maxlength="255" required>
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email" maxlength="255" required>
 
       <label for="message">Nội dung:</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
+      <textarea id="message" name="message" rows="5" maxlength="16777215" required></textarea>
 
       <button type="submit">Gửi</button>
     </form>

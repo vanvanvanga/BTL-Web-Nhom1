@@ -1,24 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql2");
 
-const connection = mysql.createConnection({
-  host: "sql.freedb.tech",
-  user: "freedb_queseraserasera",
-  password: "DAuk6$TsBkv8hRe",
-  database: "freedb_btl-web-20242",
-});
+// Kết nối CSDL
+const connection = require("./connection");
 
-connection.connect((err) => {
-  if (err) {
-    console.error(`Không thể kết nối tới CSDL: ${err.stack}`);
-  } else {
-    console.log(`Kết nối thành công!`);
-  }
-});
+// Điều hướng các trang
+router.get("/", (req, res) => {
+  res.render("pages/login")
+})
 
+// Xử lý đăng nhập
 router.post("/", (req, res) => {
-  console.log("Reporting from login.js, connection found", typeof(connection));
   let username = req.body.username;
   let password = req.body.password;
   let query = `
@@ -26,22 +18,19 @@ router.post("/", (req, res) => {
     WHERE username = "${username}"
     AND password = "${password}"
   `;
-  // If username and password is not null
-  if (username && password) {
-    connection.query(query, (err, results) => {
-      if (results.length) {
-        res.send("Đăng nhập thành công.");
-      } else {
-        res.send("Đăng nhập không thành công. Vui lòng kiểm tra thông tin và thử lại.")
-      }
 
-      if (err) {
-        console.log(err);
-      }
-    });
-  } else {
-    res.send("Tên người dùng và mật khẩu không được bỏ trống!");
-  }
+  // If username and password is not null
+  connection.query(query, (err, results) => {
+    if (results.length) {
+      res.send(`Xin chào, ${results[0].username}!`);
+    } else {
+      res.send("Tên người dùng hoặc mật khẩu không chính xác.");
+    }
+
+    if (err) {
+      console.log(err);
+    }
+  });
 });
 
 module.exports = router;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách sách</title>
+</head>
+
+<body>
+  <h1>Danh sách sách trong thư viện</h1>
+  <ol>
+    <% list.forEach(item=> { %>
+      <li>
+        <a href="/books/<%= item.book_id %>"><%= item.title %> - <%= item.author %></a>
+      </li>
+      <% }) %>
+  </ol>
+</body>
+
+</html>
