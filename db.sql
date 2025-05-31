@@ -48,4 +48,9 @@
 --     foreign key (book_id) references books(book_id)
 -- );
 
-select * from contact_queries;
+-- select * from contact_queries;
+
+-- SELECT * FROM comments;
+    -- WHERE book_id = "1";
+    
+select * from comments;

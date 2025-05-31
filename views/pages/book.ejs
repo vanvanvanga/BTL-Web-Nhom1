@@ -24,7 +24,11 @@
   </p>
   <p>Nội dung: <%= item.synopsis %>
   </p>
+
   <h2>Mượn sách</h2>
+  <% if (status == "Hiện thư viện đang không có sách này!") { %>
+    <p><%= status %></p>
+  <% } else { %>
   <p>Hiện thư viện có <%= status.length %> quyển sách này.</p>
   <table>
     <tr>
@@ -46,6 +50,7 @@
       </tr>
       <% }) %>
   </table>
+  <% } %>
 
   <h2>Đánh giá sách</h2>
   <form method="post" action="/books/book-review" id="book-review">
@@ -61,9 +66,18 @@
     <label for="rating">Đánh giá:</label>
     <input type="number" name="rating" id="rating" min="0" max="5" required><span>/5 ★</span>
 
-    <!-- <input type="hidden" name="book_id" value="<%= item.book_id %>"> -->
     <button type="submit" id="submit">Gửi</button>
   </form>
+
+  <% if (comments == "Hiện chưa có đánh giá về cuốn sách này!") { %>
+    <p id="no-comments-yet"><%= comments %></p>
+  <% } else { %>
+    <% comments.forEach(commenter => { %>
+     <h3><%= commenter.name %></h3>
+     <b>Đánh giá: </b><span><%= commenter.rating %>/5★</span>
+     <p><%= commenter.comment %></p>
+    <% }) %>
+  <% } %>
 
   <script>
     const bad_words = ["cặc", "buồi", "chim", "lồn", "bướm", "hột le", "háng", "trym", "địt", "nắc", "chịch", "xoạc", "phang", "quất", "nuốt tinh", "đút lỗ", "chơi lỗ hậu", "thông đít", "chọc lồn", "hấp diêm", "đụ má / địt mẹ", "đụ bà", "đéo", "đếch", "mẹ kiếp", "vãi lồn", "vl", "sml", "vãi cặc", "xạo lồn", "óc chó", "óc c", "bố đời", "mất dạy", "hãm l", "láo chó", "chó má", "con cặc", "vãi l", "xàm l", "đm", "vcl", "l*n", "cặk"]
@@ -72,30 +86,43 @@
       event.preventDefault();
       let contents = new FormData(event.target);
       contents = Object.fromEntries(contents);
+      contents.book_id = "<%= item.book_id %>";
 
-      bad_words.forEach(word => {
+      for (let word of bad_words) {
         if (contents.comment.toLowerCase().includes(word)) {
             window.alert("Đánh giá của bạn chứa nội dung không hợp thuần phong mỹ tục!");
             return event.target.reset();
+            break;
         }
-      })
+      }
       
-      contents = JSON.stringify(contents);
+      let JSONcontents = JSON.stringify(contents);
       fetch("/books/book-review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: contents
+        body: JSONcontents
       })
         .then((res) => {
           if (res.ok) {
             alert("Đánh giá của bạn đã được ghi lại. Cảm ơn bạn.");
+            const form = document.getElementById("book-review");
+            let html = `
+              <binh-luan-moi style="display: block; background: antiquewhite;">
+                <h3>${contents.name}</h3>
+                <b>Đánh giá: </b><span>${contents.rating}/5★</span>
+                <p>${contents.comment}</p>
+              </binh-luan-moi>
+            `;
+            form.insertAdjacentHTML("afterend", html);
+            document.getElementById("no-comments-yet").remove();
+            console.log(contents.name, contents.rating, contents.comment);
             event.target.reset();
           }
         })
         .catch(err => {
           console.log(err);
         })
-    })
+      });
   </script>
 </body>
 
