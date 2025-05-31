@@ -17,5 +17,11 @@
       </form>
     </div>
   </div>
+  <%- include("../parts/alert.ejs") %>
+  <% if (locals.message == "Đăng nhập thành công!") { %>
+    <script>
+        window.location.href = "/"; 
+    </script>
+  <% } %>
 </body>
 </html>
