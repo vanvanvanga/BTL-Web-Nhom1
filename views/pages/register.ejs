@@ -2,18 +2,19 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Đăng nhập</title>
+  <title>Đăng ký</title>
   <link rel="stylesheet" href="/css/styleloginandregis.css">
 </head>
 <body>
   <div class="container">
     <div class="left-side"></div>
     <div class="right-side">
-      <form action="/id" method="POST">
-        <h2>Đăng nhập</h2>
+      <form action="/id/register" method="POST">
+        <h2>Đăng ký</h2>
         <input type="text" name="username" placeholder="Tên đăng nhập" required>
         <input type="password" name="password" placeholder="Mật khẩu" required>
-        <button type="submit">Đăng nhập</button>
+        <input type="password" name="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+        <button type="submit">Đăng ký</button>
       </form>
     </div>
   </div>

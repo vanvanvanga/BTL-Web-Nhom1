@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+
 // Kết nối CSDL
 const connection = require("./connection");
 
-// Điều hướng các trang
+// Đăng nhập
 router.get("/", (req, res) => {
-  res.render("pages/login")
-})
+  res.render("pages/login");
+});
 
 // Xử lý đăng nhập
 router.post("/", (req, res) => {
@@ -33,4 +36,47 @@ router.post("/", (req, res) => {
   });
 });
 
+// Đăng ký
+router.get("/register", (req, res) => {
+  res.render("pages/register");
+});
+
+router.post("/register", (req, res) => {
+  let { username, password, confirmPassword } = req.body;
+
+  if (password != confirmPassword) {
+    return res.send("Lỗi: Mật khẩu được nhập lại không đúng.");
+  }
+
+  let query = `
+    SELECT * FROM users
+    WHERE username = "${username}";
+  `;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else if (results.length > 0) {
+      return res.send("Lỗi: Tên người dùng đã được sử dụng.");
+    }
+  });
+
+  bcrypt.hash(password, 8, (err, hash) => {
+    if (err) {
+      return res.send(err);
+    }
+
+    connection.query(
+      `
+        INSERT INTO users 
+        VALUES ("${username}", "${hash}", "user")
+        `,
+      (err, results) => {
+        if (err) return res.send(err);
+        res.send("Đăng ký thành công!");
+      }
+    );
+  });
+});
 module.exports = router;
