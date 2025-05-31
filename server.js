@@ -9,6 +9,9 @@ app.set("view engine", "ejs"); // Set EJS as view engine
 app.use("/css", express.static("assets/css"));
 app.use("/img", express.static("assets/img"));
 
+const bodyParser = require("body-parser")
+app.use(bodyParser.json());
+
 // Cookie parser
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -20,7 +23,7 @@ app.use(session({
   store: new FileStore({path: "./sessions"}),
   secret: "kitty-kitty-coo",
   cookie: { maxAge: 15*60000 }, // 15 phút
-  saveUninitialized: true,
+  saveUninitialized: false,
   resave: false
 }))
 
@@ -49,24 +52,24 @@ app.get("/contact", (req, res) => {
 });
 
 const connection = require("./routes/connection");
-app.post("/contact-form", (req, res) => {
+app.post("/contact", (req, res) => {
   const {name, email, message} = req.body;
+  let timestamp = new Date().toISOString();
+
   let query = `
     INSERT INTO contact_queries
-    VALUES ("${name}", "${email}", "${message}");
+    VALUES ("${name}", "${email}", "${message}", "${timestamp}");
   `
   connection.query(query, (err, results) => {
     if (err) {
       res.send(err);
     } else {
-      res.send("Da nhan phan hoi");
+      res.status(200).send();
     }
   })
 })
 
 // PHẦN CỦA CHỊ HIỀN -----------------------------------------------------------------
-
-
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

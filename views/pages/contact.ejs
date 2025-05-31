@@ -80,7 +80,7 @@
   <!-- c. Form gửi ý kiến liên hệ -->
   <div class="section">
     <h2>Gửi ý kiến liên hệ</h2>
-    <form method="post" action="/contact-form">
+    <form method="post" action="/contact" id="contact-form">
       <label for="name">Họ và tên:</label>
       <input type="text" id="name" name="name" maxlength="255" required>
 
@@ -90,15 +90,30 @@
       <label for="message">Nội dung:</label>
       <textarea id="message" name="message" rows="5" maxlength="16777215" required></textarea>
 
-      <button type="submit">Gửi</button>
+      <button type="submit" id="submit">Gửi</button>
     </form>
   </div>
 
   <script>
-    // function submitForm() {
-    //   alert("Cảm ơn bạn đã gửi ý kiến! Chúng tôi sẽ phản hồi sớm nhất.");
-    //   return false; // Ngăn không gửi form thật
-    // }
+    document.getElementById("contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      let data = new FormData(event.target);
+      data = JSON.stringify(Object.fromEntries(data));
+      fetch("/contact", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: data
+      })
+      .then((res) => {
+        if (res.ok) {
+          alert("Cảm ơn bạn đã gửi ý kiến! Chúng tôi sẽ phản hồi sớm nhất.");
+          event.target.reset();
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })  
   </script>
   <%- include("../parts/scroll-button.ejs") %>
 </body>

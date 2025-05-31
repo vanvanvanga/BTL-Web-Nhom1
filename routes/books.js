@@ -13,9 +13,9 @@ router.get("/", (req, res) => {
   connection.query(query, (err, results) => {
     if (err) {
       console.log(err);
-      res.sendStatus(404);
+      res.status(500).send();
     } else if (results.length == 0) {
-      res.send("Trong thư viện hiện đang không có sách :(")
+      res.status(404).send("Trong thư viện hiện đang không có sách :(")
     } else {
       res.render("pages/books-index.ejs", {
         list: results
@@ -35,16 +35,16 @@ router.get("/:book_id", (req, res, next) => {
       if (err) {
         console.log(err);
       } else if (results.length == 0) {
-        res.send("Không tìm thấy sách!")
+        res.status(404).send("Không tìm thấy sách!")
       } else {
         req.params.book_info = results[0];
         next();
       }
     })
   } else {
-    res.send("error: book id must be an integer");
+    res.status(404).send("Lỗi: Mã sách phải là một số nguyên.");
   }
-}, (req, res) => {
+}, (req, res, next) => {
   let query = `
     SELECT * FROM copies
     LEFT JOIN borrowing
@@ -55,18 +55,39 @@ router.get("/:book_id", (req, res, next) => {
   connection.query(query, (err, results) => {
     if (err) {
       console.log(err);
-      res.sendStatus(404);
+      res.status(404).send();
     } else if (results.length == 0) {
       res.send("No copies found.");
     } else {
-      console.log(results);
       req.params.status = results;
+      next();
+    }
+  })
+}, (req, res) => {
+  let query = `
+    SELECT * FROM comments
+    WHERE book_id = "${req.params.book_id}";
+  `;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.log(err);
+      return res.status(404).send();
+    } else if (results.length == 0) {
+      res.send("Hiện chưa có đánh giá về cuốn sách này!");
+    } else {
+      req.params.comments = results;
       res.render("pages/book", {
         item: req.params.book_info,
-        status: req.params.status
+        status: req.params.status,
+        comments: req.params.comments
       })
     }
   })
 });
 
+router.post("/book-review", (req, res) => {
+  console.log(req.body);
+  res.status(200).send();
+})
 module.exports = router;
