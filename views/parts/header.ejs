@@ -1,18 +1,26 @@
 <header>
-  <img src="/img/logo.png" alt="Logo thư viện." id="logo" />   
-  <div id="login">some bullshit..</div>
-    <details id="menu">
-      <summary>Menu</summary>
-      <ul>
-        <li>
-          <a href="/">&nbsp;Trang chủ&nbsp;</a>
-        </li>
-        <li>
-          <a href="/lien-he">&nbsp;Liên hệ&nbsp;</a>
-        </li>
-        <li>
-          <a href="/quyen-gop">&nbsp;Quyên góp&nbsp;</a>
-        </li>
-      </ul>
-    </details>
+  <img src="/img/logo.png" alt="Logo thư viện." id="logo" />
+  <div id="user-panel">
+    <span>
+      <% if (locals.username) { %>
+        Xin chào, <%= locals.username %>! <a href="/id/logout">(Đăng xuất)</a>
+      <% } else { %>
+        <a href="/id">Đăng nhập</a> | <a href="/id/register">Đăng ký</a>
+      <% } %>
+    </span>
+  </div>
+  <details id="menu">
+    <summary>Menu</summary>
+    <ul>
+      <li>
+        <a href="/">&nbsp;Trang chủ&nbsp;</a>
+      </li>
+      <li>
+        <a href="/lien-he">&nbsp;Liên hệ&nbsp;</a>
+      </li>
+      <li>
+        <a href="/quyen-gop">&nbsp;Quyên góp&nbsp;</a>
+      </li>
+    </ul>
+  </details>
 </header>

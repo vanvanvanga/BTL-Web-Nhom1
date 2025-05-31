@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 // Kết nối CSDL
@@ -33,6 +31,7 @@ router.post("/", (req, res) => {
       bcrypt.compare(password, results[0].password).then(
         (result) => {
           if (result) {
+            req.session.username = username;
             return res.render("pages/login", {
               message: "Đăng nhập thành công!"
             })
@@ -116,4 +115,9 @@ router.post("/register", (req, res) => {
   });
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    res.redirect("/")
+  })
+})
 module.exports = router;

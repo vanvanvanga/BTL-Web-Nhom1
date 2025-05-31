@@ -133,15 +133,17 @@
 
 -- SELECT * FROM users;
 
-INSERT INTO borrowing VALUES ("67", "user1");
-INSERT INTO borrowing VALUES ("19", "admin6");
-INSERT INTO borrowing VALUES ("46", "user2");
-INSERT INTO borrowing VALUES ("67", "admin2");
-INSERT INTO borrowing VALUES ("53", "user3");
-INSERT INTO borrowing VALUES ("4", "admin3");
-INSERT INTO borrowing VALUES ("27", "user4");
-INSERT INTO borrowing VALUES ("48", "admin4");
-INSERT INTO borrowing VALUES ("59", "user5");
-INSERT INTO borrowing VALUES ("47", "admin5");
+-- INSERT INTO borrowing VALUES ("67", "user1");
+-- INSERT INTO borrowing VALUES ("19", "admin6");
+-- INSERT INTO borrowing VALUES ("46", "user2");
+-- INSERT INTO borrowing VALUES ("67", "admin2");
+-- INSERT INTO borrowing VALUES ("53", "user3");
+-- INSERT INTO borrowing VALUES ("4", "admin3");
+-- INSERT INTO borrowing VALUES ("27", "user4");
+-- INSERT INTO borrowing VALUES ("48", "admin4");
+-- INSERT INTO borrowing VALUES ("59", "user5");
+-- INSERT INTO borrowing VALUES ("47", "admin5");
 
-SELECT * FROM borrowing;
+-- SELECT * FROM borrowing;
+
+SELECT * FROM contact_queries

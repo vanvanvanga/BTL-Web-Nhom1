@@ -13,6 +13,22 @@ app.use("/img", express.static("assets/img"));
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
+
+app.use(session({
+  store: new FileStore({path: "./sessions"}),
+  secret: "kitty-kitty-coo",
+  cookie: { maxAge: 15*60000 }, // 15 phút
+  saveUninitialized: true,
+  resave: false
+}))
+
+app.use((req, res, next) => {
+  res.locals.username = req.session.username;
+  next();
+})
+
 // PHẦN CỦA VÂN -----------------------------------------------------------------
 // Use res.render to load up the view file
 app.get("/", (req, res) => {
@@ -49,16 +65,7 @@ app.post("/contact-form", (req, res) => {
 })
 
 // PHẦN CỦA CHỊ HIỀN -----------------------------------------------------------------
-// const session = require("express-session");
-// const FileStore = require("session-file-store")(session);
 
-// app.use(session({
-//   store: new FileStore({path: "./sessions"}),
-//   secret: "kitty-kitty-coo",
-//   cookie: { maxAge: 15*60000 }, // 15 phút
-//   saveUninitialized: true,
-//   resave: false
-// }))
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

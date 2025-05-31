@@ -29,3 +29,12 @@
 
 -- ALTER TABLE users ADD PRIMARY KEY(username);
 
+-- CREATE TABLE contact_queries (
+-- 	name varchar(255) not null,
+--     email varchar(255) not null,
+--     message mediumtext not null
+-- );
+
+-- ALTER TABLE users MODIFY COLUMN password varchar(255);
+
+SELECT * FROM users;
