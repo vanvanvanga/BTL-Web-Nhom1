@@ -33,6 +33,7 @@ router.post("/", (req, res) => {
         (result) => {
           if (result) {
             req.session.username = username;
+            req.session.role = results[0].role;
             return res.render("pages/login", {
               message: "Đăng nhập thành công!"
             })
@@ -43,17 +44,6 @@ router.post("/", (req, res) => {
           }
         }
       )
-
-      // connection.query(query, (err, results) => {
-      //   if (results.length) {
-      //     res.send(`Xin chào, ${results[0].username}!`);
-      //   } else {
-      //     res.send("Tên người dùng hoặc mật khẩu không chính xác.");
-      //   }
-    
-      //   if (err) {
-      //     console.log(err);
-      //   }
     })
   } else {
     res.render("pages/login", {

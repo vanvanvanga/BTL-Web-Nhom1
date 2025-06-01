@@ -4,6 +4,13 @@ const connection = require("./connection");
 
 router.use(express.urlencoded({extended: false})); 
 
+router.use((req, res, next) => {
+  if (req.session.role != "admin") {
+    return res.status(403).send("Bạn không có quyền truy cập trang này!");
+  }
+  next();
+});
+
 router.get("/", (req, res, next) => {
   let query = `
     SELECT * FROM comments
