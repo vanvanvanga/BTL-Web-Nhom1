@@ -107,7 +107,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
   req.session.destroy((err) => {
     res.redirect("/")
   })

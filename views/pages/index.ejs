@@ -1,23 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trang chủ | Thư viện Nhóm 1</title>
-  <link rel="stylesheet" href="/css/common.css">
+
+  <!-- Font + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/index.css">
   <link rel="stylesheet" href="/css/cookie.css">
   <link rel="stylesheet" href="/css/scroll-button.css">
-  <style>
-    #pop-up {
-      display: none;
-    }
-  </style>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 </head>
 
 <body>
-    <%- include("../parts/header.ejs") %>
-    <%- include("../parts/footer.ejs") %>
-    <%- include("../parts/cookie.ejs") %>
-    <%- include("../parts/scroll-button.ejs") %>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container">
+      <div class="logo">
+        <a href="/">📘 Thư viện Nhóm 1</a>
+      </div>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/">Trang chủ</a></li>
+          <li><a href="/books">Tài liệu</a></li>
+          <li><a href="/contact">Liên hệ</a></li>
+          <% if (locals.username) { %>
+          <li>Xin chào, <%= locals.username %>! <a href="/id/logout">(Đăng xuất)</a></li>
+          <% } else { %>
+          <li><a href="/id">Đăng nhập</a></li> 
+          <li><a href="/id/register">Đăng ký</a></li>
+          <% } %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" data-aos="fade-up">
+    <div class="hero-inner">
+      <h1>📚 Khám phá tri thức không giới hạn</h1>
+      <p>Nền tảng chia sẻ tài liệu học tập, giáo trình và kiến thức mở.</p>
+      <a href="/books" class="btn-cta">Truy cập thư viện</a>
+    </div>
+  </section>
+
+  <!-- FEATURE SECTION -->
+  <section class="features" data-aos="fade-up" data-aos-delay="200">
+    <div class="feature-box">
+      <i class="fas fa-book-open"></i>
+      <h3>Tài liệu mới</h3>
+      <p>Khám phá các sách, bài giảng và tài liệu cập nhật mới nhất.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fas fa-laptop"></i>
+      <h3>Học tập trực tuyến</h3>
+      <p>Truy cập tài liệu mọi lúc, mọi nơi, hỗ trợ học không giới hạn.</p>
+    </div>
+    <div class="feature-box">
+      <i class="fas fa-headset"></i>
+      <h3>Hỗ trợ người dùng</h3>
+      <p>Liên hệ đội ngũ quản trị để được giải đáp và hỗ trợ tận tình.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Nguyễn Hồng Vân, Hoàng Phương Linh, Lưu Ngọc Hiền</p>
+    </div>
+  </footer>
+
+  <!-- COOKIE + SCROLL BTN -->
+  <%- include("../parts/cookie.ejs") %>
+  <%- include("../parts/scroll-button.ejs") %>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init({ duration: 800, once: true });</script>
 </body>
 </html>

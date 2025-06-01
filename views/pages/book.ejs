@@ -1,129 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    <%= item.title %>
-  </title>
-  <style>
-    label,
-    input {
-      display: block;
-    }
-  </style>
+  <title><%= item.title %></title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/book-detail.css">
 </head>
 
 <body>
-  <h1>
-    <%= item.title %>
-  </h1>
-  <img src="/img/covers/<%= item.title %>.jpg" alt="<%= item.title %>.jpg" />
-  <p>Tác giả: <%= item.author %>
-  </p>
-  <p>Nội dung: <%= item.synopsis %>
-  </p>
+  <main class="container">
+    <!-- Thông tin sách -->
+    <section class="book-info">
+      <img src="/img/covers/<%= item.title %>.jpg" alt="<%= item.title %>" />
+      <div class="book-meta">
+        <h1><%= item.title %></h1>
+        <p><strong>Tác giả:</strong> <%= item.author %></p>
+        <p><strong>Nội dung:</strong> <%= item.synopsis %></p>
+      </div>
+    </section>
 
-  <h2>Mượn sách</h2>
-  <% if (status == "Hiện thư viện đang không có sách này!") { %>
-    <p><%= status %></p>
-  <% } else { %>
-  <p>Hiện thư viện có <%= status.length %> quyển sách này.</p>
-  <table>
-    <tr>
-      <th>Mã quyển sách</th>
-      <th>Trạng thái</th>
-    </tr>
-    <% status.forEach(item=> { %>
-      <tr>
-        <td>
-          <%= item.copy_id %>
-        </td>
-        <td>
-          <% if (item.username) { %>
-            Đang được mượn.
-            <% } else { %>
-              Sẵn sàng cho mượn.
-              <% } %>
-        </td>
-      </tr>
-      <% }) %>
-  </table>
-  <% } %>
+    <!-- Tình trạng sách -->
+    <section class="availability">
+      <h2>Mượn sách</h2>
+      <% if (status == "Hiện thư viện đang không có sách này!") { %>
+        <p class="no-stock"><%= status %></p>
+      <% } else { %>
+        <p>Hiện thư viện có <strong><%= status.length %></strong> quyển sách này.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Mã sách</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% status.forEach(item => { %>
+              <tr>
+                <td><%= item.copy_id %></td>
+                <td>
+                  <% if (item.username) { %>Đang được mượn<% } else { %>Sẵn sàng<% } %>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
 
-  <h2>Đánh giá sách</h2>
-  <form method="post" action="/books/book-review" id="book-review">
-    <label for="name">Họ và tên:</label>
-    <input type="text" id="name" name="name" maxlength="255" required>
+    <!-- Đánh giá sách -->
+    <section class="review-section">
+      <h2>Đánh giá sách</h2>
+      <form method="post" action="/books/book-review" id="book-review">
+        <label for="name">Họ và tên:</label>
+        <input type="text" id="name" name="name" required>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" maxlength="255" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-    <label for="comment">Nội dung:</label>
-    <textarea id="comment" name="comment" rows="5" maxlength="16777215" required></textarea>
+        <label for="comment">Nội dung:</label>
+        <textarea id="comment" name="comment" rows="4" required></textarea>
 
-    <label for="rating">Đánh giá:</label>
-    <input type="number" name="rating" id="rating" min="0" max="5" required><span>/5 ★</span>
+        <label for="rating">Đánh giá:</label>
+        <input type="number" id="rating" name="rating" min="0" max="5" style="width: 100px; display: inline;" required>
+        <span>/5 ★</span>
 
-    <button type="submit" id="submit">Gửi</button>
-  </form>
+        <button style="display: block;" type="submit">Gửi đánh giá</button>
+      </form>
 
-  <% if (comments == "Hiện chưa có đánh giá về cuốn sách này!") { %>
-    <p id="no-comments-yet"><%= comments %></p>
-  <% } else { %>
-    <% comments.forEach(commenter => { %>
-     <h3><%= commenter.name %></h3>
-     <b>Đánh giá: </b><span><%= commenter.rating %>/5★</span>
-     <p><%= commenter.comment %></p>
-    <% }) %>
-  <% } %>
+      <!-- Danh sách đánh giá -->
+      <% if (comments == "Hiện chưa có đánh giá về cuốn sách này!") { %>
+        <p id="no-comments-yet"><%= comments %></p>
+      <% } else { %>
+        <div class="comments">
+          <% comments.forEach(commenter => { %>
+            <div class="comment">
+              <h3><%= commenter.name %></h3>
+              <span>⭐ <%= commenter.rating %>/5</span>
+              <p><%= commenter.comment %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </section>
+  </main>
 
+  <!-- JavaScript kiểm tra từ cấm và xử lý form -->
   <script>
     const bad_words = ["cặc", "buồi", "chim", "lồn", "bướm", "hột le", "háng", "trym", "địt", "nắc", "chịch", "xoạc", "phang", "quất", "nuốt tinh", "đút lỗ", "chơi lỗ hậu", "thông đít", "chọc lồn", "hấp diêm", "đụ má / địt mẹ", "đụ bà", "đéo", "đếch", "mẹ kiếp", "vãi lồn", "vl", "sml", "vãi cặc", "xạo lồn", "óc chó", "óc c", "bố đời", "mất dạy", "hãm l", "láo chó", "chó má", "con cặc", "vãi l", "xàm l", "đm", "vcl", "l*n", "cặk"]
 
-    document.getElementById("book-review").addEventListener("submit", (event) => {
-      event.preventDefault();
-      let contents = new FormData(event.target);
-      contents = Object.fromEntries(contents);
-      contents.book_id = "<%= item.book_id %>";
+document.getElementById("book-review").addEventListener("submit", (event) => {
+  event.preventDefault();
+  let contents = new FormData(event.target);
+  contents = Object.fromEntries(contents);
+  contents.book_id = "<%= item.book_id %>";
 
-      for (let word of bad_words) {
-        if (contents.comment.toLowerCase().includes(word)) {
-            window.alert("Đánh giá của bạn chứa nội dung không hợp thuần phong mỹ tục!");
-            return event.target.reset();
-            break;
-        }
+  for (let word of bad_words) {
+    if (contents.comment.toLowerCase().includes(word)) {
+        window.alert("Đánh giá của bạn chứa nội dung không hợp thuần phong mỹ tục!");
+        return event.target.reset();
+        break;
+    }
+  }
+  
+  let JSONcontents = JSON.stringify(contents);
+  fetch("/books/book-review", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSONcontents
+  })
+    .then((res) => {
+      if (res.ok) {
+        alert("Đánh giá của bạn đã được ghi lại. Cảm ơn bạn.");
+        const form = document.getElementById("book-review");
+        let html = `
+          <binh-luan-moi style="display: block; margin-top: 20px; padding: 20px; border-radius: 10px; background: antiquewhite;">
+            <h3>${contents.name}</h3>
+            <b>Đánh giá: </b><span>${contents.rating}/5★</span>
+            <p>${contents.comment}</p>
+          </binh-luan-moi>
+        `;
+        form.insertAdjacentHTML("afterend", html);
+        document.querySelector("binh-luan-moi").scrollIntoView({ behavior: 'smooth' });
+        document.getElementById("no-comments-yet").remove();
+        console.log(contents.name, contents.rating, contents.comment);
+        event.target.reset();
       }
-      
-      let JSONcontents = JSON.stringify(contents);
-      fetch("/books/book-review", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSONcontents
-      })
-        .then((res) => {
-          if (res.ok) {
-            alert("Đánh giá của bạn đã được ghi lại. Cảm ơn bạn.");
-            const form = document.getElementById("book-review");
-            let html = `
-              <binh-luan-moi style="display: block; background: antiquewhite;">
-                <h3>${contents.name}</h3>
-                <b>Đánh giá: </b><span>${contents.rating}/5★</span>
-                <p>${contents.comment}</p>
-              </binh-luan-moi>
-            `;
-            form.insertAdjacentHTML("afterend", html);
-            document.getElementById("no-comments-yet").remove();
-            console.log(contents.name, contents.rating, contents.comment);
-            event.target.reset();
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      });
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  });
   </script>
 </body>
-
 </html>

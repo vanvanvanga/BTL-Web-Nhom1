@@ -52,7 +52,10 @@ router.post("/delete-comment", (req, res) => {
     WHERE comment_id = ${req.body.comment_id}
   `
   connection.query(query, (err, results) => {
-    if (err) return res.status(500).send("Đã có lỗi xảy ra khi xóa bình luận.")
+    console.error(err);
+    if (err) {
+      return res.status(500).send("Đã có lỗi xảy ra khi xóa bình luận.");
+    }
     else res.status(200).send();
   })
 });
@@ -66,8 +69,12 @@ router.post("/edit-book-title", (req, res) => {
   `
 
   connection.query(query, (err, results) => {
-    if (err) return res.send("Đã có lỗi xảy ra khi cập nhật tiêu đề sách!")
-    else res.status(200).send();
+    if (err) {
+      console.error(err);
+      return res.send("Đã có lỗi xảy ra khi cập nhật tiêu đề sách!")
+    } else {
+      res.status(200).send();
+    }
   })
 })
 
@@ -80,9 +87,13 @@ router.post("/edit-book-author", (req, res) => {
   `
 
   connection.query(query, (err, results) => {
-    if (err) return res.send("Đã có lỗi xảy ra khi cập nhật tác giả sách!")
-    else res.status(200).send();
-  })
+    if (err) {
+      console.err(err);
+      return res.send("Đã có lỗi xảy ra khi cập nhật tác giả sách!")
+    } else {
+      res.status(200).send();
+    }
+  });
 })
 
 router.post("/edit-book-synopsis", (req, res) => {
@@ -94,8 +105,12 @@ router.post("/edit-book-synopsis", (req, res) => {
   `
 
   connection.query(query, (err, results) => {
-    if (err) return res.send("Đã có lỗi xảy ra khi cập nhật nội dung sách!")
-    else res.status(200).send();
+    if (err) {
+      console.error(err);
+      return res.send("Đã có lỗi xảy ra khi cập nhật nội dung sách!")
+    } else {
+      res.status(200).send();
+    }
   })
 })
 

@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Danh sách sách</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thư viện sách</title>
+
+  <!-- Font + CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/books.css">
 </head>
 
 <body>
-  <h1>Danh sách sách trong thư viện</h1>
-  <ol>
-    <% list.forEach(item=> { %>
-      <li>
-        <a href="/books/<%= item.book_id %>"><%= item.title %> - <%= item.author %></a>
-      </li>
-      <% }) %>
-  </ol>
-</body>
+  <main class="container">
+    <h1>📚 Danh sách sách trong thư viện</h1>
 
+    <div class="book-grid">
+      <% list.forEach(item => { %>
+        <div class="book-card">
+          <img src="/img/covers/<%= item.title %>.jpg" alt="<%= item.title %>">
+          <div class="card-info">
+            <h3><%= item.title %></h3>
+            <p><%= item.author %></p>
+            <a href="/books/<%= item.book_id %>" class="btn-view">Xem chi tiết</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+</body>
 </html>
