@@ -1,26 +1,20 @@
-<header>
-  <img src="/img/logo.png" alt="Logo thư viện." id="logo" />
-  <div id="user-panel">
-    <span>
-      <% if (locals.username) { %>
-        Xin chào, <%= locals.username %>! <a href="/id/logout">(Đăng xuất)</a>
-      <% } else { %>
-        <a href="/id">Đăng nhập</a> | <a href="/id/register">Đăng ký</a>
-      <% } %>
-    </span>
+<header class="site-header">
+  <div class="container">
+    <div class="logo">
+      <a href="/">📘 Thư viện Nhóm 1</a>
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="/">Trang chủ</a></li>
+        <li><a href="/books">Tài liệu</a></li>
+        <li><a href="/contact">Liên hệ</a></li>
+        <% if (locals.username) { %>
+        <li>Xin chào, <%= locals.username %>! <a href="/id/logout">(Đăng xuất)</a></li>
+        <% } else { %>
+        <li><a href="/id">Đăng nhập</a></li> 
+        <li><a href="/id/register">Đăng ký</a></li>
+        <% } %>
+      </ul>
+    </nav>
   </div>
-  <details id="menu">
-    <summary>Menu</summary>
-    <ul>
-      <li>
-        <a href="/">&nbsp;Trang chủ&nbsp;</a>
-      </li>
-      <li>
-        <a href="/lien-he">&nbsp;Liên hệ&nbsp;</a>
-      </li>
-      <li>
-        <a href="/quyen-gop">&nbsp;Quyên góp&nbsp;</a>
-      </li>
-    </ul>
-  </details>
 </header>

@@ -18,26 +18,7 @@
 
 <body>
   <!-- HEADER -->
-  <header class="site-header">
-    <div class="container">
-      <div class="logo">
-        <a href="/">📘 Thư viện Nhóm 1</a>
-      </div>
-      <nav>
-        <ul class="nav-list">
-          <li><a href="/">Trang chủ</a></li>
-          <li><a href="/books">Tài liệu</a></li>
-          <li><a href="/contact">Liên hệ</a></li>
-          <% if (locals.username) { %>
-          <li>Xin chào, <%= locals.username %>! <a href="/id/logout">(Đăng xuất)</a></li>
-          <% } else { %>
-          <li><a href="/id">Đăng nhập</a></li> 
-          <li><a href="/id/register">Đăng ký</a></li>
-          <% } %>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <%- include("../parts/header.ejs") %> 
 
   <!-- HERO -->
   <section class="hero" data-aos="fade-up">
@@ -68,11 +49,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Nguyễn Hồng Vân, Hoàng Phương Linh, Lưu Ngọc Hiền</p>
-    </div>
-  </footer>
+  <%- include("../parts/footer.ejs") %>
 
   <!-- COOKIE + SCROLL BTN -->
   <%- include("../parts/cookie.ejs") %>
