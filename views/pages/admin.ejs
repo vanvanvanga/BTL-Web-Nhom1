@@ -6,6 +6,156 @@
   <title>Admin</title>
 </head>
 <body>
+  <h1>Trang Admin</h1>
   <p>Lượt view: <%= locals.views %></p>
+  <h2>Danh sách sách</h2>
+  <% if (books == "Đã có lỗi xảy ra khi load danh sách các đầu sách trong thư viện.") { %>
+    <p><%= books %></p>
+  <% } else { %>
+   <table>
+    <tr>
+      <th>Tên sách</th>
+      <th>Tác giả</th>
+      <th>Nội dung</th>
+    </tr>
+    <% books.forEach(book => { %>
+      <tr id="book-<%= book.book_id %>">
+      <td title="Click để sửa tiêu đề sách" onclick='
+        document.getElementById("edit-book-title-<%= book.book_id %>").style.display = "block";
+        '>
+        <span id="book-title-<%= book.book_id %>"><%= book.title %></span>
+        <form class="edit-book-title" id="edit-book-title-<%= book.book_id %>" style="display: none;" action="/admin/edit-book-title" method="post">
+          <input style="display: none;" type="text" name="book_id" value="<%= book.book_id %>">
+          <input type="text" name="new_book_title" id="new_book_title" placeholder="<%= book.title %>">
+          <button type="submit">Lưu</button>
+        </form>
+      </td>
+      
+      <td title="Click để sửa tác giả sách" onclick='
+      document.getElementById("edit-book-author-<%= book.book_id %>").style.display = "block";
+      '>
+        <span id="book-author-<%= book.book_id %>"><%= book.author %></span>
+        <form class="edit-book-author" id="edit-book-author-<%= book.book_id %>" style="display: none;" action="/admin/edit-book-author" method="post">
+          <input style="display: none;" type="text" name="book_id" value="<%= book.book_id %>">
+          <input type="text" name="new_book_author" id="new_book_author" placeholder="<%= book.author %>">
+          <button type="submit">Lưu</button>
+        </form>
+      </td>
+      
+      <td title="Click để sửa nội dung sách" onclick='
+      document.getElementById("edit-book-synopsis-<%= book.book_id %>").style.display = "block";
+      '>
+        <p id="book-synopsis-<%= book.book_id %>"><%= book.synopsis %></p>
+        <form class="edit-book-synopsis" id="edit-book-synopsis-<%= book.book_id %>" style="display: none;" action="/admin/edit-book-synopsis" method="post">
+          <input style="display: none;" type="text" name="book_id" value="<%= book.book_id %>">
+          <textarea type="text" name="new_book_synopsis" id="new_book_synopsis" value="<%= book.synopsis %>"><%= book.synopsis %></textarea>
+          <button type="submit">Lưu</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+
+   </table>
+   
+  <% } %>
+
+  <h2>Danh sách bình luận</h2>
+  <% if (comments == "Đã có lỗi xảy ra khi load danh sách bình luận.") { %>
+    <p><%= comments %></p>
+  <% } else { %>
+    <table>
+      <tr>
+        <th>Tên sách</th>
+        <th>Bình luận</th>
+        <th>Người bình luận</th>
+        <th>Hành động</th>
+      </tr>
+      <% comments.forEach(comment => { %>
+        <tr id="comment-<%= comment.comment_id %>">
+          <td><%= comment.title %></td>
+          <td><%= comment.comment %></td>
+          <td><%= comment.name %> (<%= comment.email %>)</td>
+          <td><button type="button" onclick='fetch("/admin/delete-comment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              comment_id: "<%= comment.comment_id %>"
+            })
+          }).then((res) => {
+            if (res.ok) {
+              window.alert("Bình luận đã được xóa.");
+              document.getElementById("comment-<%= comment.comment_id %>").remove();
+            }
+          })'>Xóa bình luận</button></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } %>
+
+  <script>
+    Array.from(document.getElementsByClassName("edit-book-title")).forEach(form => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let data = Object.fromEntries(new FormData(form));
+
+        fetch("/admin/edit-book-title", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }).then((res) => {
+          if (res.ok) {
+            window.alert("Cập nhật tên sách thành công.");
+            document.getElementById("book-title-" + data.book_id).textContent = data.new_book_title;
+            document.getElementById("book-title-" + data.book_id).style.background = "antiquewhite";
+            document.getElementById("edit-book-title-" + data.book_id).style.display = "none";
+          }
+        })
+      })
+    })
+  </script>
+
+  <script>
+    Array.from(document.getElementsByClassName("edit-book-author")).forEach(form => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let data = Object.fromEntries(new FormData(form));
+
+        fetch("/admin/edit-book-author", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }).then((res) => {
+          if (res.ok) {
+            window.alert("Cập nhật tác giả sách thành công.");
+            document.getElementById("book-author-" + data.book_id).textContent = data.new_book_author;
+            document.getElementById("book-author-" + data.book_id).style.background = "antiquewhite";
+            document.getElementById("edit-book-author-" + data.book_id).style.display = "none";
+          }
+        })
+      })
+    })
+  </script>
+
+  <script>
+    Array.from(document.getElementsByClassName("edit-book-synopsis")).forEach(form => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let data = Object.fromEntries(new FormData(form));
+
+        fetch("/admin/edit-book-synopsis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        }).then((res) => {
+          if (res.ok) {
+            window.alert("Cập nhật tên truyện thành công.");
+            document.getElementById("book-synopsis-" + data.book_id).textContent = data.new_book_synopsis;
+            document.getElementById("book-synopsis-" + data.book_id).style.background = "antiquewhite";
+            document.getElementById("edit-book-synopsis-" + data.book_id).style.display = "none";
+          }
+        })
+      })
+    })
+  </script>
 </body>
 </html>

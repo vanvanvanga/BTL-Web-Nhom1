@@ -47,6 +47,7 @@ CREATE TABLE comments (
     comment mediumtext not null,
     rating int not null,
     book_id int unsigned not null,
+    comment_id int auto_increment primary key not null,
     foreign key (book_id) references books(book_id)
 );
 

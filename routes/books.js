@@ -102,15 +102,17 @@ router.post("/book-review", (req, res) => {
   console.log(req.body);
   const {name, email, comment, rating, book_id} = req.body;
   let query = `
-    INSERT INTO comments
-    VALUES ("${name}", "${email}", "${comment}", "${rating}", ${book_id})
+    INSERT INTO comments (name, email, comment, rating, book_id)
+    VALUES ("${name}", "${email}", "${comment}", ${rating}, ${book_id})
   `
   connection.query(query, (err, results) => {
     if (err) {
+      console.error(err.stack);
       return res.status(500).send();
     } else {
       res.status(200).send();
     }
   })
 });
+
 module.exports = router;
