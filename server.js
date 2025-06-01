@@ -29,24 +29,20 @@ app.use(session({
 }))
 
 const fs = require("fs");
-const path = __dirname + "/other/view-count.json";
-let view_count = fs.readFileSync(path);
-    view_count = JSON.parse(view_count);
+let views = fs.readFileSync("./other/view-count.json");
+    views = JSON.parse(views);
 
 app.use((req, res, next) => {
-  if (req.method == "GET" && req.url != "/favicon.ico") {
-    view_count++;
-    console.log("View count: ", view_count);
-  }
-  res.locals.view_count = view_count;
+  res.locals.views = views;
   res.locals.username = req.session.username;
   next();
 })
 
 // PHẦN CỦA VÂN -----------------------------------------------------------------
 // Use res.render to load up the view file
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.render("pages/index")
+  next()
 });
 
 // Đăng nhập đăng xuất v.v
@@ -58,8 +54,9 @@ const books = require("./routes/books");
 app.use("/books", books);
 
 // PHẦN CỦA LINH -----------------------------------------------------------------
-app.get("/contact", (req, res) => {
+app.get("/contact", (req, res, next) => {
   res.render("pages/contact")
+  next()
 });
 
 const connection = require("./routes/connection");
@@ -80,13 +77,15 @@ app.post("/contact", (req, res) => {
   })
 })
 
-app.get("/admin", (req, res) => {
-  res.render("pages/admin")
-})
+const admin = require("./routes/admin");
+app.use("/admin", admin);
 
+const vcount = require("./routes/view-count.js");
 app.use((req, res) => {
-  fs.writeFileSync(path, JSON.stringify(view_count));
-  res.status(404).send('Không tìm thấy trang :(');
+  console.log(req.url);
+  if (req.method == "GET" && req.url != "/favicon.ico" && req.url != "/.well-known/appspecific/com.chrome.devtools.json") {
+    vcount();
+  }
 });
 
 // PHẦN CỦA CHỊ HIỀN -----------------------------------------------------------------

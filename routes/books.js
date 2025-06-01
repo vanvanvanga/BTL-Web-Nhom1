@@ -5,7 +5,7 @@ const router = express.Router();
 const connection = require("./connection");
 
 // /books
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   let query = `
     SELECT * FROM books;
   `;
@@ -21,6 +21,7 @@ router.get("/", (req, res) => {
         list: results,
       });
     }
+    next();
   });
 });
 
@@ -87,12 +88,13 @@ router.get(
       next();
     });
   },
-  (req, res) => {
+  (req, res, next) => {
     res.render("pages/book", {
       item: req.params.book_info,
       status: req.params.status,
       comments: req.params.comments,
     });
+    next()
   }
 );
 

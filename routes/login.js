@@ -6,8 +6,9 @@ const bcrypt = require("bcryptjs");
 const connection = require("./connection");
 
 // Đăng nhập
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   res.render("pages/login");
+  next()
 });
 
 // Xử lý đăng nhập
@@ -62,10 +63,11 @@ router.post("/", (req, res) => {
 });
 
 // Đăng ký
-router.get("/register", (req, res) => {
+router.get("/register", (req, res, next) => {
   res.render("pages/register", {
     message: null
   });
+  next()
 });
 
 router.post("/register", (req, res) => {
@@ -119,5 +121,7 @@ router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     res.redirect("/")
   })
+  next();
 })
+
 module.exports = router;
