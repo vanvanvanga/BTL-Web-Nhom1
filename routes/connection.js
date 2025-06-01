@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) {
-    console.error(`Không thể kết nối tới CSDL: ${err.stack}`);
+    // console.error(`Không thể kết nối tới CSDL: ${err.stack}`);
   } else {
     console.log(`Kết nối thành công!`);
   }

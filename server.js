@@ -19,6 +19,7 @@ app.use(cookieParser());
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 
+// Sessions
 app.use(session({
   store: new FileStore({path: "./sessions"}),
   secret: "kitty-kitty-coo",
@@ -27,7 +28,17 @@ app.use(session({
   resave: false
 }))
 
+const fs = require("fs");
+const path = __dirname + "/other/view-count.json";
+let view_count = fs.readFileSync(path);
+    view_count = JSON.parse(view_count);
+
 app.use((req, res, next) => {
+  if (req.method == "GET" && req.url != "/favicon.ico") {
+    view_count++;
+    console.log("View count: ", view_count);
+  }
+  res.locals.view_count = view_count;
   res.locals.username = req.session.username;
   next();
 })
@@ -68,6 +79,15 @@ app.post("/contact", (req, res) => {
     }
   })
 })
+
+app.get("/admin", (req, res) => {
+  res.render("pages/admin")
+})
+
+app.use((req, res) => {
+  fs.writeFileSync(path, JSON.stringify(view_count));
+  res.status(404).send('Không tìm thấy trang :(');
+});
 
 // PHẦN CỦA CHỊ HIỀN -----------------------------------------------------------------
 app.listen(PORT, () => {
