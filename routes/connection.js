@@ -8,19 +8,19 @@ const mysql = require("mysql2");
 //   database: "freedb_btl-web-20242",
 // });
 
-// const connection = mysql.createConnection({
-//   host: "sql.freedb.tech",
-//   user: "freedb_friendly_encounter",
-//   password: "DR$Gag#hMEVY3Ww",
-//   database: "freedb_btl_web_20242",
-// });
-
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "thietlabuonte",
-  database: "btl_web_20242",
+  host: "sql.freedb.tech",
+  user: "freedb_friendly_encounter",
+  password: "DR$Gag#hMEVY3Ww",
+  database: "freedb_btl_web_20242",
 });
+
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "thietlabuonte",
+//   database: "btl_web_20242",
+// });
 
 connection.connect((err) => {
   if (err) {
