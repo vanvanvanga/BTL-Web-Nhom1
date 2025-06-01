@@ -33,6 +33,7 @@ let views = fs.readFileSync("./other/view-count.json");
     views = JSON.parse(views);
 
 app.use((req, res, next) => {
+  res.locals.role = req.session.role;
   res.locals.views = views;
   res.locals.username = req.session.username;
   next();

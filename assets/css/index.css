@@ -168,6 +168,121 @@ footer {
 }
 
 footer .container {
-  display: block; /* override flex */
+  display: block;
   text-align: center;
+}
+
+/* ======================== */
+/* ✅ Responsive bổ sung */
+/* ======================== */
+
+/* Menu toggle (ẩn mặc định) */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+/* ≤1200px */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .hero-inner h1 {
+    font-size: 32px;
+  }
+
+  .feature-box {
+    max-width: 100%;
+  }
+}
+
+/* ≤800px */
+@media (max-width: 800px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    width: 200px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    z-index: 999;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .site-header .container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .logo {
+    margin-bottom: 8px;
+  }
+
+  /* Dropdown ẩn hoàn toàn ở mobile */
+  .nav-list .dropdown {
+    display: none !important;
+  }
+
+  .nav-list li.has-dropdown:hover .dropdown {
+    display: none !important;
+  }
+}
+
+/* ======================== */
+/* ✅ Dropdown menu lớn (desktop) */
+/* ======================== */
+.nav-list li.has-dropdown {
+  position: relative;
+}
+
+.nav-list .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 0;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: none;
+  z-index: 999;
+  min-width: 160px;
+}
+
+.nav-list .dropdown li {
+  list-style: none;
+}
+
+.nav-list .dropdown li a {
+  display: block;
+  padding: 10px 20px;
+  color: #1f2937;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-list .dropdown li a:hover {
+  background-color: #f0f4f8;
+}
+
+/* Hover để hiển thị submenu (desktop) */
+@media (min-width: 801px) {
+  .nav-list li.has-dropdown:hover .dropdown {
+    display: block;
+  }
 }

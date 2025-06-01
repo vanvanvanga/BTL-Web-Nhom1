@@ -45,4 +45,3 @@ Làm xong hết trước 25/5 để check
 |Hệ số mức độ tự làm (không copy trên mạng, không sử dụng các thư viện ngoài, 0-1)|
 |Điểm cộng trình bày và thiết kế giao diện (0-1)|
 |Điểm cộng tổ chức project: cấu trúc thư mục/file, code phân tách mạch lạc các phần (0-1)|
-

@@ -3,13 +3,25 @@
     <div class="logo">
       <a href="/">📘 Thư viện Nhóm 1</a>
     </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <nav>
       <ul class="nav-list">
-        <li><a href="/">Trang chủ</a></li>
+        <li class="has-dropdown">
+          <a href="/">Trang chủ</a>
+          <ul class="dropdown">
+            <li><a href="/contact">Giới thiệu</a></li>
+          </ul>
+        </li>
         <li><a href="/books">Tài liệu</a></li>
         <li><a href="/contact">Liên hệ</a></li>
-        <% if (locals.username) { %>
+        <% if (locals.role == "user") { %>
         <li>Xin chào, <%= locals.username %>! <a href="/id/logout">(Đăng xuất)</a></li>
+        <% } else if (locals.role == "admin") { %>
+          <li class="has-dropdown"><span>Xin chào, <%= locals.username %>! </span><a href="/id/logout">(Đăng xuất)</a>
+            <ul class="dropdown">
+              <li><a href="/admin">Quản lý website</a></li>
+            </ul>
+          </li>
         <% } else { %>
         <li><a href="/id">Đăng nhập</a></li> 
         <li><a href="/id/register">Đăng ký</a></li>
@@ -18,3 +30,11 @@
     </nav>
   </div>
 </header>
+
+<script>
+  // Toggle menu (for mobile responsive)
+  function toggleMenu() {
+      const navList = document.querySelector('.nav-list');
+      navList.classList.toggle('show');
+    }
+</script>

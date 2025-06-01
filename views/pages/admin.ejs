@@ -4,6 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin</title>
+  <style>
+    table, tr, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 5px;
+    }
+
+    textarea {
+      width: 90%;
+    }
+  </style>
 </head>
 <body>
   <h1>Trang Admin</h1>
@@ -149,7 +163,7 @@
           body: JSON.stringify(data)
         }).then((res) => {
           if (res.ok) {
-            window.alert("Cập nhật tên truyện thành công.");
+            window.alert("Cập nhật tên sách thành công.");
             document.getElementById("book-synopsis-" + data.book_id).textContent = data.new_book_synopsis;
             document.getElementById("book-synopsis-" + data.book_id).style.background = "antiquewhite";
             document.getElementById("edit-book-synopsis-" + data.book_id).style.display = "none";
